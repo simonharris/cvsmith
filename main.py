@@ -1,4 +1,5 @@
 import argparse
+from pathlib import Path
 
 from markdownify import markdownify
 from openai import OpenAI
@@ -26,6 +27,13 @@ def get_desc_url() -> str:
     return args.source_desc
 
 
+def load_description(source: str) -> str:
+    path = Path(source)
+    if path.exists():
+        return path.read_text(encoding='utf-8')
+    return fetch_source(source)
+
+
 def hello_openai() -> str:
     client = OpenAI(api_key=OAI_KEY)
     response = client.responses.create(
@@ -35,12 +43,13 @@ def hello_openai() -> str:
     return response.output_text.strip()
 
 
-md: str = fetch_source(SOURCE_CV)
-# print(md)
+if __name__ == '__main__':
+    md: str = fetch_source(SOURCE_CV)
+    # print(md)
 
-# source_desc: str = fetch_source(get_desc_url())
-# print(source_desc)
+    source_desc: str = load_description(get_desc_url())
+    print(source_desc)
 
-hello: str = hello_openai()
-print(hello)
+    # hello: str = hello_openai()
+    # print(hello)
 
