@@ -1,0 +1,10 @@
+
+
+Given the provided CV and job description, generate a concise, focused CV tailored to this role. Keep the output in Markdown. Highlight the most relevant experience, skills, and achievements for the job, while removing or de-emphasising less relevant material. Preserve factual accuracy and keep the result brief and professional.
+
+CV content:
+{{cv_content}}
+
+Job description:
+{{job_description}}
+
